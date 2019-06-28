@@ -270,7 +270,12 @@ class Calendar extends React.Component {
     return (
       <div
         className={
-          'remainders' + (this.state.remaindersFullScreen ? ' active' : '')
+          'remainders' +
+          (this.state.remaindersFullScreen ? ' active' : '') +
+          (this.state.selected.format('dddd') === 'Sunday' ||
+          this.state.selected.format('dddd') === 'Saturday'
+            ? ' weekend'
+            : '')
         }
       >
         <div className="close-button">
