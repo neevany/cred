@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import style from './app.less';
+import './app.less';
+
+import Calendar from './components/calender/calender';
 
 class AppComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
   render() {
     return (
       <div className="cred-container">
-        Cred Calendar
+        <Calendar />
       </div>
     );
   }

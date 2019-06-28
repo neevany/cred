@@ -1,0 +1,129 @@
+//variables & mixins
+@white: #ffffff;
+
+@light-grey: #efefef;
+@medium-grey: #c0c0c0;
+@dark-grey: #868686;
+
+@blue: rgb(70, 135, 220);
+@darken-blue: darken(@blue, 10%);
+@light-blue: lighten(@blue, 45%);
+
+@green: rgb(125, 210, 115);
+@darken-green: darken(@green, 10%);
+@light-green: lighten(@green, 45%);
+
+@orange: rgb(241, 165, 115);
+@darken-orange: darken(@orange, 10%);
+@light-orange: lighten(@orange, 45%);
+
+@border-color: @dark-grey;
+@background: @white;
+
+body {
+  background: @light-grey;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+}
+
+.calendar {
+  padding: 20px 10px;
+  display: block;
+  background: @white;
+  width: 315px;
+  border-radius: 5px;
+  margin: 0px auto;
+  box-shadow: 0 0 15px 0 @medium-grey;
+  text-align: center;
+
+  header {
+    cursor: default;
+    display: block;
+    font-weight: bold;
+    text-transform: uppercase;
+    user-select: none;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+
+    .month-display {
+      align-items: center;
+      height: 40px;
+    }
+
+    .month-label {
+      color: @orange;
+      flex: 1;
+    }
+
+    .arrow {
+      text-align: center;
+      flex-basis: 15%;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        background: @light-grey;
+      }
+    }
+  }
+
+  .day-names {
+    color: @dark-grey;
+    font-weight: bold;
+    cursor: default;
+
+    .day {
+      cursor: default;
+
+      &:hover {
+        background: inherit;
+      }
+    }
+  }
+
+  .day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin: 8px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.2s;
+
+    &:hover {
+      background: @light-grey;
+    }
+
+    &:first-child {
+      border-left: none;
+    }
+
+    &.today {
+      background: @light-blue;
+    }
+
+    &.weekend {
+      color: @green;
+    }
+
+    &.different-month {
+      color: @medium-grey;
+    }
+
+    &.selected {
+      box-shadow: 0 0 15px 0 #c0c0c0;
+      background: @blue;
+      color: @white;
+    }
+  }
+}
