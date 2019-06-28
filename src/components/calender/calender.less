@@ -24,7 +24,7 @@ body {
   background: @light-grey;
 }
 
-.row {
+.cred-calendar-row {
   display: flex;
   width: 100%;
 }
@@ -33,14 +33,15 @@ body {
   width: 18px;
 }
 
-.calendar-container {
+.cred-calendar-container {
+  position: relative;
   width: 345px;
   box-shadow: 0 0 15px 0 @medium-grey;
   margin: 0px auto;
   border-radius: 5px;
   background: @white;
 }
-.calendar {
+.cred-calendar {
   padding: 20px 10px;
   display: block;
 
@@ -60,6 +61,7 @@ body {
     }
 
     .month-label {
+      cursor: pointer;
       color: @orange;
       flex: 1;
     }
@@ -137,6 +139,17 @@ body {
   background: @blue;
   padding: 20px;
   color: @white;
+  transition: all 1s;
+  height: 100%;
+  width: 100%;
+  top: 0;
+
+  &.active {
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    width: 100%;
+  }
 
   .header {
     display: flex;
@@ -175,4 +188,17 @@ body {
       }
     }
   }
+}
+
+.add-button {
+  cursor: pointer;
+}
+
+.close-button {
+  text-align: right;
+  cursor: pointer;
+}
+
+.add-remainder-form {
+  color: black;
 }
