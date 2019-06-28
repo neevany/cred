@@ -5,17 +5,17 @@
 @medium-grey: #c0c0c0;
 @dark-grey: #868686;
 
-@blue: rgb(70, 135, 220);
+@blue: #4687dc;
 @darken-blue: darken(@blue, 10%);
-@light-blue: lighten(@blue, 45%);
+@light-blue: lighten(@blue, 25%);
 
 @green: rgb(125, 210, 115);
 @darken-green: darken(@green, 10%);
-@light-green: lighten(@green, 45%);
+@light-green: lighten(@green, 25%);
 
-@orange: rgb(241, 165, 115);
+@orange: #f78a42;
 @darken-orange: darken(@orange, 10%);
-@light-orange: lighten(@orange, 45%);
+@light-orange: lighten(@orange, 25%);
 
 @border-color: @dark-grey;
 @background: @white;
@@ -29,17 +29,23 @@ body {
   width: 100%;
 }
 
+.icon {
+  width: 18px;
+}
+
+.calendar-container {
+  width: 345px;
+  box-shadow: 0 0 15px 0 @medium-grey;
+  margin: 0px auto;
+  border-radius: 5px;
+  background: @white;
+}
 .calendar {
   padding: 20px 10px;
   display: block;
-  background: @white;
-  width: 315px;
-  border-radius: 5px;
-  margin: 0px auto;
-  box-shadow: 0 0 15px 0 @medium-grey;
-  text-align: center;
 
   header {
+    text-align: center;
     cursor: default;
     display: block;
     font-weight: bold;
@@ -59,7 +65,6 @@ body {
     }
 
     .arrow {
-      text-align: center;
       flex-basis: 15%;
       font-weight: bold;
       cursor: pointer;
@@ -90,10 +95,12 @@ body {
   }
 
   .day {
+    user-select: none;
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
+    height: 30px;
     margin: 8px;
     padding: 5px;
     cursor: pointer;
@@ -102,10 +109,6 @@ body {
 
     &:hover {
       background: @light-grey;
-    }
-
-    &:first-child {
-      border-left: none;
     }
 
     &.today {
@@ -121,9 +124,55 @@ body {
     }
 
     &.selected {
-      box-shadow: 0 0 15px 0 #c0c0c0;
+      box-shadow: 0 0 15px 3px @medium-grey;
       background: @blue;
       color: @white;
+    }
+  }
+}
+
+.remainders {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background: @blue;
+  padding: 20px;
+  color: @white;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .remainder-date-lable {
+    text-transform: capitalize;
+    font-size: 20px;
+  }
+  .remainder-date {
+    font-size: 12px;
+  }
+
+  .remainders-list {
+    ul {
+      list-style: none;
+      padding: 10px;
+      li {
+        list-style: none;
+        border-left: 1px dashed #86d6ff;
+        padding: 0px 0 15px 15px;
+        position: relative;
+      }
+      li::before {
+        position: absolute;
+        left: -5px;
+        content: ' ';
+        border-radius: 50%;
+        background: @white;
+        border: 5px solid @white;
+      }
+      :last-child {
+        border-left: 0;
+      }
     }
   }
 }

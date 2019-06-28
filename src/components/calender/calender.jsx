@@ -10,6 +10,23 @@ class Calendar extends React.Component {
     this.state = {
       month: moment(),
       selected: moment().startOf('day'),
+      remainders: JSON.parse(
+        window.localStorage.getItem('remainders') ||
+          JSON.stringify([
+            {
+              date: moment().format('MMDDYYYY'),
+              title: 'Dentist Appointemnt',
+              location: 'Bangalore',
+              time: '10:30-11:00',
+            },
+            {
+              date: moment().format('MMDDYYYY'),
+              title: 'Sprint Planning',
+              location: 'Bangalore',
+              time: '11:30-12:30',
+            },
+          ])
+      ),
     };
   }
 
@@ -64,36 +81,78 @@ class Calendar extends React.Component {
     return weeks;
   }
 
+  renderRemainders() {
+    return (
+      <div className="remainders">
+        <div className="header">
+          <div>
+            <div className="remainder-date-lable">
+              {this.state.selected.fromNow()}
+            </div>
+            <div className="remainder-date">
+              {this.state.selected.format('DD/MM/YYYY')}
+            </div>
+          </div>
+          <b>Add New</b>
+        </div>
+        <div className="remainders-list">
+          <ul>
+            {this.state.remainders
+              .filter(r => r.date === this.state.selected.format('MMDDYYYY'))
+              .map(r => (
+                <li class="item">
+                  <div>
+                    <div>{r.title}</div>
+                    <div>
+                      <i className="icon fa fa-map-marker" />
+                      {r.location}
+                    </div>
+                    <div>
+                      <i className="icon fa fa-clock-o" />
+                      {r.time}
+                    </div>
+                  </div>
+                </li>
+              ))}
+          </ul>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
-      <section className="calendar">
-        <header className="header">
-          <div className="month-display row">
-            <i
-              className="arrow fa fa-angle-left"
-              onClick={() => this.previous()}
-            />
-            <span className="month-label">
-              {this.state.month.format('MMMM YYYY')}
-            </span>
-            <i
-              className="arrow fa fa-angle-right"
-              onClick={() => this.next()}
-            />
-          </div>
-          <div className="row day-names">
-            {weekDaysShort.map((wD, index) => (
-              <span
-                key={index}
-                className={'day' + (wD === 'S' ? ' weekend' : '')}
-              >
-                {wD}
+      <div className="calendar-container">
+        <section className="calendar">
+          <header className="header">
+            <div className="month-display row">
+              <i
+                className="arrow fa fa-angle-left"
+                onClick={() => this.previous()}
+              />
+              <span className="month-label">
+                {this.state.month.format('MMMM YYYY')}
               </span>
-            ))}
-          </div>
-        </header>
-        {this.renderWeeks()}
-      </section>
+              <i
+                className="arrow fa fa-angle-right"
+                onClick={() => this.next()}
+              />
+            </div>
+            <div className="row day-names">
+              {weekDaysShort.map((wD, index) => (
+                <span
+                  key={index}
+                  className={'day' + (wD === 'S' ? ' weekend' : '')}
+                >
+                  {wD}
+                </span>
+              ))}
+            </div>
+          </header>
+          {this.renderWeeks()}
+        </section>
+        {this.renderRemainders()}
+      </div>
     );
   }
 }
